@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom Scrollbar Styles */
+/* Works on Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the entire scrollbar */
+  height: 8px; /* Height of the scrollbar for horizontal scrolling */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9; /* Light gray track (slate-100) */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #3b82f6; /* Blue-500 thumb */
+  border-radius: 10px;
+  border: 2px solid #f1f5f9; /* Creates padding around thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #2563eb; /* Darker blue (Blue-600) on hover */
+}
+
+/* Optional: Style the corner where vertical and horizontal scrollbars meet */
+::-webkit-scrollbar-corner {
+  background: #f1f5f9; /* Match track background */
+}
+
+/* Firefox scrollbar styling (requires newer versions) */
+/* Note: Firefox support for scrollbar-color is more limited than WebKit */
+html {
+  scrollbar-width: thin; /* "auto" or "thin" */
+  scrollbar-color: #3b82f6 #f1f5f9; /* thumb track */
+}
