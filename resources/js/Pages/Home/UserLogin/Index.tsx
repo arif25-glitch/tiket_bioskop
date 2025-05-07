@@ -152,7 +152,7 @@ export default function UserLoginIndex({ canResetPassword = false, status }: Use
                 </motion.div>
             </main>
 
-            <style jsx global>{`
+            <style>{`
                 @keyframes gradient-slow {
                     0% { background-position: 0% 50%; }
                     50% { background-position: 100% 50%; }

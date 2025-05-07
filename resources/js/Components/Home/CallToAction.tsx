@@ -34,7 +34,7 @@ export default function CallToAction() {
                     {/* Button 1: White background, primary text color */}
                     <motion.div whileHover={buttonHover}>
                         <Link
-                            href={route('register')}
+                            href={route('user.register')}
                             className="inline-flex w-full items-center justify-center rounded-md border border-transparent bg-white px-6 py-3 text-base font-medium text-blue-600 shadow-sm hover:bg-blue-50 sm:w-auto"
                         >
                             Daftar Gratis
@@ -43,7 +43,7 @@ export default function CallToAction() {
                     {/* Button 2: Transparent background, white border/text */}
                     <motion.div whileHover={buttonHover}>
                         <Link
-                            href={route('login')}
+                            href={route('user.login')}
                             className="inline-flex w-full items-center justify-center rounded-md border border-white px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-white/10 sm:w-auto"
                         >
                             Masuk Akun

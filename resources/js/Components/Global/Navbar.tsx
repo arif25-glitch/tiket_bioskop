@@ -153,7 +153,7 @@ export default function Navbar() {
                                 <>
                                     <motion.div whileHover={linkHover}>
                                         <Link
-                                            href={route('login')}
+                                            href={route('user.login')}
                                             className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-700"
                                         >
                                             Masuk
@@ -161,7 +161,7 @@ export default function Navbar() {
                                     </motion.div>
                                     <motion.div whileHover={buttonHover}>
                                         <Link
-                                            href={route('register')}
+                                            href={route('user.register')}
                                             className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
                                         >
                                             Daftar
@@ -266,8 +266,8 @@ export default function Navbar() {
                             <Link href={route('dashboard')} className="block rounded-md bg-blue-600 px-3 py-2 text-base font-medium text-white hover:bg-blue-700" onClick={() => setIsOpen(false)}>Dashboard</Link>
                         ) : (
                             <>
-                                <Link href={route('login')} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700" onClick={() => setIsOpen(false)}>Masuk</Link>
-                                <Link href={route('register')} className="block rounded-md bg-blue-600 px-3 py-2 text-base font-medium text-white hover:bg-blue-700" onClick={() => setIsOpen(false)}>Daftar</Link>
+                                <Link href={route('user.login')} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700" onClick={() => setIsOpen(false)}>Masuk</Link>
+                                <Link href={route('user.register')} className="block rounded-md bg-blue-600 px-3 py-2 text-base font-medium text-white hover:bg-blue-700" onClick={() => setIsOpen(false)}>Daftar</Link>
                             </>
                         )}
                     </div>

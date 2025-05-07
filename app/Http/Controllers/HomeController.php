@@ -11,9 +11,4 @@ class HomeController extends Controller
     {
         return Inertia::render('Home/Index');
     }
-
-    public function guestAuth()
-    {
-        return Inertia::render('UserLogin/Index');
-    }
 }

@@ -73,7 +73,7 @@ export default function HeroSection() {
                 {/* Button styling might need adjustment for contrast */}
                 <motion.div variants={itemVariants}>
                     <Link
-                        href={route('register')}
+                        href={route('user.register')}
                         className="inline-block rounded-lg bg-blue-600 px-8 py-3 text-lg font-semibold text-white shadow-lg transition duration-300 ease-in-out hover:bg-blue-700 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900" // Added focus styles
                     >
                         Mulai Nonton Sekarang
