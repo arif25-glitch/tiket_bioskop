@@ -5,7 +5,7 @@ import { User, AtSign, Lock, Eye, EyeOff, AlertTriangle, Shield, CheckCircle2 } 
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: '',
+        username: '',
         email: '',
         password: '',
         password_confirmation: '',
@@ -58,8 +58,14 @@ export default function Register() {
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('register'), {
-            onFinish: () => reset('password', 'password_confirmation'),
+        post(route('user.doRegister'), {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset('password', 'password_confirmation');
+            },
+            onError: (errors) => {
+                console.error(errors);
+            }
         });
     };
 
@@ -89,45 +95,45 @@ export default function Register() {
                     transition={{ delay: 0.1 }}
                 >
                     <div className={`group relative h-14 rounded-xl border-2 transition-all duration-200 ${
-                        errors.name 
+                        errors.username 
                             ? 'border-red-300 bg-red-50' 
-                            : focusedField === 'name' 
+                            : focusedField === 'username' 
                                 ? 'border-blue-400 bg-blue-50/30' 
-                                : data.name 
+                                : data.username 
                                     ? 'border-gray-300' 
                                     : 'border-gray-200 bg-gray-50/50'
                     }`}>
                         <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
                             <User className={`h-5 w-5 transition-colors ${
-                                focusedField === 'name' ? 'text-blue-600' : ''
+                                focusedField === 'username' ? 'text-blue-600' : ''
                             }`} />
                         </div>
                         
                         <input
                             ref={nameInputRef}
-                            id="name"
+                            id="username"
                             type="text"
-                            name="name"
-                            value={data.name}
+                            name="username"
+                            value={data.username}
                             className={`peer h-full w-full rounded-xl border-none bg-transparent px-11 pt-2 outline-none ${
-                                errors.name ? 'text-red-600' : 'text-gray-700'
+                                errors.username ? 'text-red-600' : 'text-gray-700'
                             }`}
-                            onChange={(e) => setData('name', e.target.value)}
-                            onFocus={() => setFocusedField('name')}
+                            onChange={(e) => setData('username', e.target.value)}
+                            onFocus={() => setFocusedField('username')}
                             onBlur={() => setFocusedField(null)}
                             required
                         />
                         
                         <label 
-                            htmlFor="name"
+                            htmlFor="username"
                             className={`absolute left-11 text-sm transition-all duration-200 
-                                ${data.name || focusedField === 'name' 
+                                ${data.username || focusedField === 'username' 
                                     ? 'top-1 text-xs font-medium' 
                                     : 'top-1/2 -translate-y-1/2'
                                 } ${
-                                    errors.name 
+                                    errors.username 
                                         ? 'text-red-500' 
-                                        : focusedField === 'name' 
+                                        : focusedField === 'username' 
                                             ? 'text-blue-700' 
                                             : 'text-gray-500'
                                 }`}
@@ -136,14 +142,14 @@ export default function Register() {
                         </label>
                     </div>
                     
-                    {errors.name && (
+                    {errors.username && (
                         <motion.div 
                             initial={{ opacity: 0, y: -5 }}
                             animate={{ opacity: 1, y: 0 }}
                             className="mt-1.5 flex items-center gap-x-1 text-sm text-red-500"
                         >
                             <AlertTriangle className="h-4 w-4" />
-                            <span>{errors.name}</span>
+                            <span>{errors.username}</span>
                         </motion.div>
                     )}
                 </motion.div>

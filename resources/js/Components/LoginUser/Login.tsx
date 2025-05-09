@@ -30,8 +30,18 @@ export default function Login({
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('login'), {
-            onFinish: () => reset('password'),
+        post(route('user.doLogin'), {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset('password');
+            },
+            onError: (errors) => {
+                if (errors.email) {
+                    emailInputRef.current?.focus();
+                } else if (errors.password) {
+                    passwordInputRef.current?.focus();
+                }
+            },
         });
     };
 
@@ -210,7 +220,7 @@ export default function Login({
                     )}
                 </motion.div>
 
-                {/* Remember Me & Forgot Password Row */}
+                {/* Remember Me Row */}
                 <motion.div 
                     className="flex items-center justify-between"
                     initial={{ opacity: 0 }}
@@ -243,15 +253,6 @@ export default function Login({
                         </div>
                         <span className="text-sm text-gray-600">Ingat saya</span>
                     </label>
-                    
-                    {canResetPassword && (
-                        <Link
-                            href={route('password.request')}
-                            className="text-sm font-medium text-blue-600 transition-colors hover:text-blue-800"
-                        >
-                            Lupa password?
-                        </Link>
-                    )}
                 </motion.div>
 
                 {/* Submit Button */}

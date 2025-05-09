@@ -1,8 +1,8 @@
-import { Link, usePage } from '@inertiajs/react';
+import { Link, usePage, router } from '@inertiajs/react';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import { useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
-import { Search, X } from 'lucide-react';
+import { Search, X, LogOut } from 'lucide-react';
 
 export default function Navbar() {
     const { auth } = usePage().props;
@@ -32,6 +32,10 @@ export default function Navbar() {
 
     const clearSearch = () => {
         setSearchTerm('');
+    };
+
+    const handleLogout = () => {
+        router.post(route('user.logout'));
     };
 
     const navVariants = {
@@ -141,14 +145,24 @@ export default function Navbar() {
                         {/* Right Section: Auth Links (Desktop) */}
                         <div className="hidden md:flex md:items-center md:space-x-6">
                             {auth.user ? (
-                                <motion.div whileHover={buttonHover}>
-                                    <Link
-                                        href={route('dashboard')}
-                                        className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
+                                <div className="flex items-center space-x-4">
+                                    <motion.div whileHover={buttonHover}>
+                                        <Link
+                                            href={route('user.index')}
+                                            className="rounded-md bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-blue-700"
+                                        >
+                                            Profil Saya
+                                        </Link>
+                                    </motion.div>
+                                    <motion.button
+                                        whileHover={buttonHover}
+                                        onClick={handleLogout}
+                                        className="flex items-center gap-2 rounded-md border border-red-200 px-4 py-2 text-sm font-medium text-red-600 shadow-sm hover:bg-red-50"
                                     >
-                                        Dashboard
-                                    </Link>
-                                </motion.div>
+                                        <LogOut className="h-4 w-4" />
+                                        <span>Keluar</span>
+                                    </motion.button>
+                                </div>
                             ) : (
                                 <>
                                     <motion.div whileHover={linkHover}>
@@ -263,7 +277,25 @@ export default function Navbar() {
                         <Link href="#featured" className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700" onClick={() => setIsOpen(false)}>Film Unggulan</Link>
                         <Link href="#how-it-works" className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700" onClick={() => setIsOpen(false)}>Cara Kerja</Link>
                         {auth.user ? (
-                            <Link href={route('dashboard')} className="block rounded-md bg-blue-600 px-3 py-2 text-base font-medium text-white hover:bg-blue-700" onClick={() => setIsOpen(false)}>Dashboard</Link>
+                            <>
+                                <Link 
+                                    href={route('user.index')}
+                                    className="block rounded-md bg-blue-600 px-3 py-2 text-base font-medium text-white hover:bg-blue-700" 
+                                    onClick={() => setIsOpen(false)}
+                                >
+                                    Profil Saya
+                                </Link>
+                                <button
+                                    onClick={() => {
+                                        handleLogout();
+                                        setIsOpen(false);
+                                    }}
+                                    className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-base font-medium text-red-600 hover:bg-red-50"
+                                >
+                                    <LogOut className="h-5 w-5" />
+                                    <span>Keluar</span>
+                                </button>
+                            </>
                         ) : (
                             <>
                                 <Link href={route('user.login')} className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-700" onClick={() => setIsOpen(false)}>Masuk</Link>
